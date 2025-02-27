@@ -50,12 +50,13 @@ func get_all_screenshots():
 		"creationtime": FileAccess.get_modified_time(folder+p)
 	})
 	files.sort_custom(func(a, b): return a["creationtime"] > b["creationtime"])
+	files.map(func(d:Dictionary): d.make_read_only())
 	return files
 
 func rename_screenshot(old_name:String, new_name:String) -> Error:
-	var folder := SCREENSHOT_FOLDER 
+	var folder := SCREENSHOT_FOLDER
 	if !savefile.is_empty():
 		folder += savefile + "/"
-	return DirAccess.rename_absolute(folder+old_name, folder+new_name)
+	return DirAccess.rename_absolute(folder+old_name+".jpg", folder+new_name+".jpg")
 
 

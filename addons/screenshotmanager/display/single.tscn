@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpi050fkjyttw"]
+
+[ext_resource type="Texture2D" uid="uid://c8viwlw16dawx" path="res://icon.svg" id="1_6cfid"]
+[ext_resource type="Script" path="res://addons/screenshotmanager/display/single.gd" id="1_hy7gr"]
+
+[node name="Single" type="VBoxContainer"]
+custom_minimum_size = Vector2(280, 200)
+offset_right = 279.0
+offset_bottom = 200.0
+script = ExtResource("1_hy7gr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_6cfid")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HB" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameEdit" type="LineEdit" parent="HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeleteBtn" type="Button" parent="HB"]
+layout_mode = 2
+text = "X"
+
+[connection signal="text_submitted" from="HB/NameEdit" to="." method="_on_name_edit_text_submitted"]
+[connection signal="pressed" from="HB/DeleteBtn" to="." method="_on_delete_btn_pressed"]
