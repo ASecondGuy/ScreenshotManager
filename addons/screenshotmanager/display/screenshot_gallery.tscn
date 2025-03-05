@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5w4nyqq0tldc"]
 
-[ext_resource type="Script" path="res://addons/screenshotmanager/display/screenshot_gallery.gd" id="1_s2wri"]
+[ext_resource type="Script" path="res://addons/screenshotmanager/display/screenshot_gallery.gd" id="1_fx4d7"]
 
 [node name="ScreenshotGallery" type="ScrollContainer"]
 anchors_preset = 15
@@ -8,9 +8,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_s2wri")
+script = ExtResource("1_fx4d7")
 
 [node name="FC" type="HFlowContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="DeleteDialog" type="ConfirmationDialog" parent="."]
+exclusive = false
+
+[connection signal="confirmed" from="DeleteDialog" to="." method="_on_delete_dialog_confirmed"]

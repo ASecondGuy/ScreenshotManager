@@ -17,6 +17,8 @@ func update(dict:Dictionary):
 	var p : String = dict["path"]
 	_current_name = p.get_file().trim_suffix("."+p.get_extension())
 	_name_edit.text = _current_name
+	_name_edit.release_focus()
+	_delete_btn.release_focus()
 
 func _on_name_edit_text_submitted(new_text):
 	rename_request.emit(_current_name, new_text)

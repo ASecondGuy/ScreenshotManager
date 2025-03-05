@@ -57,6 +57,8 @@ func rename_screenshot(old_name:String, new_name:String) -> Error:
 	var folder := SCREENSHOT_FOLDER
 	if !savefile.is_empty():
 		folder += savefile + "/"
+	if FileAccess.file_exists(folder+new_name+".jpg"):
+		return ERR_ALREADY_EXISTS
 	return DirAccess.rename_absolute(folder+old_name+".jpg", folder+new_name+".jpg")
 
 

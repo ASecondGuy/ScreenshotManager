@@ -4,6 +4,10 @@ const SINGLE_SCENE := preload("res://addons/screenshotmanager/display/single.tsc
 
 @onready var _fc = $FC
 
+@export var confirm_deletion := true
+
+var _to_delete_path := ""
+
 func _ready():
 	ScreenshotManager.screenshot_taken.connect(func(_texture): update())
 	update()
@@ -25,9 +29,25 @@ func update():
 	
 
 func _on_delete_request(path:String):
-	DirAccess.remove_absolute(path)
-	update()
+	if confirm_deletion:
+		_to_delete_path = path
+		$DeleteDialog.dialog_text = (
+		"Do you really want to delete \n%s\n" % 
+		path.get_file().trim_suffix("."+path.get_extension())
+		)
+		$DeleteDialog.popup_centered()
+	else:
+		DirAccess.remove_absolute(path)
+		update()
 
 func _on_rename_request(old_name:String, new_name:String):
 	ScreenshotManager.rename_screenshot(old_name, new_name)
+	update()
+
+
+func _on_delete_dialog_confirmed():
+	var err := DirAccess.remove_absolute(_to_delete_path)
+	if err != OK:
+		push_error("Couldn't delete screenshot %s because %s" % 
+		[_to_delete_path, error_string(err)])
 	update()
