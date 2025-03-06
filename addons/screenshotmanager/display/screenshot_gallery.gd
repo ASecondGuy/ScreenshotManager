@@ -1,3 +1,4 @@
+class_name ScreenshotGallery
 extends ScrollContainer
 
 const SINGLE_SCENE := preload("res://addons/screenshotmanager/display/single.tscn")

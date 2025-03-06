@@ -1,3 +1,4 @@
+class_name ScreenshotManagerNode
 extends Node
 
 const SCREENSHOT_FOLDER := "user://screenshots/"
