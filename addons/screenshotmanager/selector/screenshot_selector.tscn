@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg6im8phxfgnx"]
+
+[ext_resource type="Script" path="res://addons/screenshotmanager/selector/screenshot_selector.gd" id="1_6h0sc"]
+[ext_resource type="Texture2D" uid="uid://c8viwlw16dawx" path="res://icon.svg" id="1_io2av"]
+
+[node name="ScreenshotSelector" type="Window"]
+title = "Select a Screenshot"
+size = Vector2i(571, 317)
+transient = true
+script = ExtResource("1_6h0sc")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SC" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="HF" type="HFlowContainer" parent="SC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[node name="TextureRect7" type="TextureRect" parent="SC/HF"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_io2av")
+stretch_mode = 5
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
