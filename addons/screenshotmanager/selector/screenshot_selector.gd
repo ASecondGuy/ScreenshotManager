@@ -23,6 +23,7 @@ func start_selection():
 		_flow.add_child(b)
 		b.size_flags_horizontal = b.SIZE_EXPAND_FILL
 		b.stretch_mode = b.STRETCH_KEEP_ASPECT_CENTERED
+		b.tooltip_text = (shot["path"] as String).get_file().split(".")[0]
 		var texture := ImageTexture.create_from_image(shot["image"])
 		# how much to resize so the screenshot has wanted width
 		var mult : float = sh_width/shot["image"].get_size().x
