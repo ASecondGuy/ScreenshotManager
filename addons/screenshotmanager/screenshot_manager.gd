@@ -3,15 +3,17 @@ extends Node
 
 const SCREENSHOT_FOLDER := "user://screenshots/"
 
-## emited right after the screenshot is taken
-signal screenshot_taken(texture:Texture2D)
+## emited right after the screenshot is taken and last_screenshot is updated
+## every screenshot is a new image
+signal screenshot_taken(image:Image)
 
 ## always the last screenshot as a texture resource
-var last_screenshot : Texture2D
+## if you use this it will automatically update to the new screenshot
+var last_screenshot : ImageTexture
 
 ## The folder screenshots are saved to.
 ## Think of it as the currently loaded savefile or profile.
-## Other savefiles are ignored. leave empty to 
+## Other savefiles are ignored. leave empty to use the default folder
 var savefile := ""
 
 func _ready():
@@ -31,19 +33,22 @@ func _unhandled_key_input(event):
 
 func take_screenshot():
 	var img := get_viewport().get_texture().get_image()
-	var text := ImageTexture.create_from_image(img)
-	last_screenshot = text
-	screenshot_taken.emit(text)
+	if is_instance_valid(last_screenshot):
+		last_screenshot.set_image(img)
+	else:
+		last_screenshot = ImageTexture.create_from_image(img)
+	
 	var shot_name := "screenshot_%s.jpg" % floori(Time.get_unix_time_from_system())
 	var folder := SCREENSHOT_FOLDER 
 	if !savefile.is_empty():
 		folder += savefile + "/"
 	DirAccess.make_dir_recursive_absolute(folder)
-	var err := text.get_image().save_jpg(folder+shot_name)
+	var err := img.save_jpg(folder+shot_name)
 	if err != OK:
 		push_warning("ScreenshotManager: Couldn't save screenshot because %s" % error_string(err))
 	else:
 		print("ScreenshotManager: Shot taken %s" % shot_name)
+	screenshot_taken.emit(img)
 
 func get_all_screenshots():
 	var folder := SCREENSHOT_FOLDER 
