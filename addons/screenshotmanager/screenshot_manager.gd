@@ -17,6 +17,7 @@ var savefile := ""
 func _ready():
 	# make default input if none is specified
 	if !InputMap.has_action("screenshot"):
+		push_warning("No screenshot input action. Creating default.")
 		InputMap.add_action("screenshot")
 		var e := InputEventKey.new()
 		e.key_label = KEY_F2
@@ -26,19 +27,23 @@ func _ready():
 func _unhandled_key_input(event):
 	if event.is_action("screenshot") and event.is_pressed() and !event.is_echo():
 		get_viewport().set_input_as_handled()
-		var img := get_viewport().get_texture().get_image()
-		var text := ImageTexture.create_from_image(img)
-		last_screenshot = text
-		screenshot_taken.emit(text)
-		var shot_name := "screenshot_%s.jpg" % floori(Time.get_unix_time_from_system())
-		var folder := SCREENSHOT_FOLDER 
-		if !savefile.is_empty():
-			folder += savefile + "/"
-		DirAccess.make_dir_recursive_absolute(folder)
-		var err := text.get_image().save_jpg(folder+shot_name)
-		if err != OK:
-			push_warning("ScreenshotManager: Couldn't save screenshot because %s" % error_string(err))
+		take_screenshot()
 
+func take_screenshot():
+	var img := get_viewport().get_texture().get_image()
+	var text := ImageTexture.create_from_image(img)
+	last_screenshot = text
+	screenshot_taken.emit(text)
+	var shot_name := "screenshot_%s.jpg" % floori(Time.get_unix_time_from_system())
+	var folder := SCREENSHOT_FOLDER 
+	if !savefile.is_empty():
+		folder += savefile + "/"
+	DirAccess.make_dir_recursive_absolute(folder)
+	var err := text.get_image().save_jpg(folder+shot_name)
+	if err != OK:
+		push_warning("ScreenshotManager: Couldn't save screenshot because %s" % error_string(err))
+	else:
+		print("ScreenshotManager: Shot taken %s" % shot_name)
 
 func get_all_screenshots():
 	var folder := SCREENSHOT_FOLDER 
