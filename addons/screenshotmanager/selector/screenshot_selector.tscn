@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bg6im8phxfgnx"]
 
 [ext_resource type="Script" path="res://addons/screenshotmanager/selector/screenshot_selector.gd" id="1_6h0sc"]
-[ext_resource type="Texture2D" uid="uid://c8viwlw16dawx" path="res://icon.svg" id="1_io2av"]
+[ext_resource type="Texture2D" uid="uid://bqjixxjxjk6rx" path="res://addons/screenshotmanager/icon.png" id="2_rwivf"]
 
 [node name="ScreenshotSelector" type="Window"]
 title = "Select a Screenshot"
@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.52549, 0.52549, 0.52549, 1)
 
 [node name="SC" type="ScrollContainer" parent="."]
 anchors_preset = 15
@@ -32,43 +33,43 @@ size_flags_vertical = 3
 [node name="TextureRect" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect2" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect3" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect4" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect5" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect6" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [node name="TextureRect7" type="TextureRect" parent="SC/HF"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_io2av")
+texture = ExtResource("2_rwivf")
 stretch_mode = 5
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

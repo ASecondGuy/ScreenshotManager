@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpi050fkjyttw"]
 
-[ext_resource type="Texture2D" uid="uid://c8viwlw16dawx" path="res://icon.svg" id="1_6cfid"]
 [ext_resource type="Script" path="res://addons/screenshotmanager/display/single.gd" id="1_hy7gr"]
+[ext_resource type="Texture2D" uid="uid://bqjixxjxjk6rx" path="res://addons/screenshotmanager/icon.png" id="2_dwgop"]
 
 [node name="Single" type="VBoxContainer"]
 custom_minimum_size = Vector2(280, 200)
@@ -12,7 +12,7 @@ script = ExtResource("1_hy7gr")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_6cfid")
+texture = ExtResource("2_dwgop")
 expand_mode = 1
 stretch_mode = 5
 
