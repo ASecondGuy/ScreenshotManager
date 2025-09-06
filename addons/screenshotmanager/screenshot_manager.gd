@@ -5,7 +5,7 @@ const SCREENSHOT_FOLDER := "user://screenshots/"
 
 ## emited right after the screenshot is taken and last_screenshot is updated
 ## every screenshot is a new image
-signal screenshot_taken(image:Image)
+signal screenshot_taken(image:Image, screenshot_name:String)
 
 ## always the last screenshot as a texture resource
 ## if you use this it will automatically update to the new screenshot
@@ -31,6 +31,8 @@ func _unhandled_key_input(event):
 		get_viewport().set_input_as_handled()
 		take_screenshot()
 
+
+# manually trigger a screenshot 
 func take_screenshot():
 	var img := get_viewport().get_texture().get_image()
 	if is_instance_valid(last_screenshot):
@@ -48,8 +50,13 @@ func take_screenshot():
 		push_warning("ScreenshotManager: Couldn't save screenshot because %s" % error_string(err))
 	else:
 		print("ScreenshotManager: Shot taken %s" % shot_name)
-	screenshot_taken.emit(img)
+	screenshot_taken.emit(img, shot_name.trim_suffix(".jpg"))
 
+
+# get and array of Dictionaries. One dict per screenshot with the elements: 
+#  - path: static path of screenshot (usually user://screenshots/savefile/screenshot_1743023137.jpg)
+#  - image: Image resource
+#  - creation_time: Timestamp of creation_time
 func get_all_screenshots():
 	var folder := SCREENSHOT_FOLDER 
 	if !savefile.is_empty():
@@ -58,12 +65,14 @@ func get_all_screenshots():
 	files = files.map(func(p): return {
 		"path": folder+p,
 		"image": Image.load_from_file(folder+p),
-		"creationtime": FileAccess.get_modified_time(folder+p)
+		"creation_time": FileAccess.get_modified_time(folder+p)
 	})
-	files.sort_custom(func(a, b): return a["creationtime"] > b["creationtime"])
+	files.sort_custom(func(a, b): return a["creation_time"] > b["creation_time"])
 	files.map(func(d:Dictionary): d.make_read_only())
 	return files
 
+
+# names are both relative to the screenshot folder and without fileextension
 func rename_screenshot(old_name:String, new_name:String) -> Error:
 	var folder := SCREENSHOT_FOLDER
 	if !savefile.is_empty():

@@ -10,7 +10,7 @@ const SINGLE_SCENE := preload("res://addons/screenshotmanager/display/single.tsc
 var _to_delete_path := ""
 
 func _ready():
-	ScreenshotManager.screenshot_taken.connect(func(_texture): update())
+	ScreenshotManager.screenshot_taken.connect(func(_texture, _name): update())
 	update()
 
 func update():

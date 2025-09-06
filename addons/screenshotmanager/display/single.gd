@@ -7,7 +7,7 @@ signal delete_request(path:String)
 @onready var _name_edit = $HB/NameEdit
 @onready var _delete_btn = $HB/DeleteBtn
 
-# dict has {"path", "image", "creationtime"}
+# dict has {"path", "image", "creation_time"}
 var screenshot_dict : Dictionary
 var _current_name : String
 
