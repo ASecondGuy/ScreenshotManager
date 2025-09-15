@@ -24,6 +24,7 @@ func _ready():
 		var e := InputEventKey.new()
 		e.key_label = KEY_F2
 		InputMap.action_add_event("screenshot", e)
+	last_screenshot = ImageTexture.new()
 
 
 func _unhandled_key_input(event):
